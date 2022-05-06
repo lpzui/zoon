@@ -17,7 +17,7 @@ const routes = [
                     title: '系统首页'
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
-            }, 
+            },
             {
                 path: "/table",
                 name: "basetable",
@@ -38,11 +38,11 @@ const routes = [
                 path: "/editReal",
                 name: "editReal",
                 meta: {
-                    title: '编辑实名制1'
+                    title: '编辑实名制'
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/realname/UpdateForm.vue")
 
-            }, 
+            },
             {
                 path: "/addReal",
                 name: "addReal",
@@ -51,7 +51,7 @@ const routes = [
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/realname/AddForm.vue")
 
-            }, 
+            },
             {
                 path: "/contract",
                 name: "contract",
@@ -61,12 +61,44 @@ const routes = [
                 component: () => import ( /* webpackChunkName: "table" */ "../views/contract/index.vue")
             },
             {
+                path: "/contractAdd",
+                name: "contractAdd",
+                meta: {
+                    title: '新增合同'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/contract/AddForm.vue")
+            },
+            {
+                path: "/contractUpdate",
+                name: "contractUpdate",
+                meta: {
+                    title: '编辑合同'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/contract/UpdateForm.vue")
+            },
+            {
                 path: "/groupmanage",
                 name: "groupmanage",
                 meta: {
                     title: '班组管理'
                 },
                 component: () => import ( /* webpackChunkName: "table" */ "../views/groupmanage/index.vue")
+            },
+            {
+                path: "/groupAdd",
+                name: "groupAdd",
+                meta: {
+                    title: '新增班组'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/groupmanage/AddFrom.vue")
+            },
+            {
+                path: "/groupUpdate",
+                name: "groupUpdate",
+                meta: {
+                    title: '编辑班组'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/groupmanage/UpdateFrom.vue")
             },
             {
                 path: "/subcontract",
