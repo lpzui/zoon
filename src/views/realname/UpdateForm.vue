@@ -31,13 +31,17 @@
                                 <el-input v-model="form.region"></el-input>
                             </el-form-item>
                             <el-form-item label="性别" prop="sex">
-                                <el-input v-model="form.sex"></el-input>
+                                <el-select v-model="form.sex" placeholder="请选择">
+                                    <el-option key="1" label="男" value="bbk"></el-option>
+                                    <el-option key="2" label="女" value="xtc"></el-option>
+                                </el-select>
                             </el-form-item>
                             <el-form-item label="年龄" prop="age">
                                 <el-input v-model="form.age"></el-input>
                             </el-form-item>
                             <el-form-item label="出生日期" prop="bart">
-                                <el-input v-model="form.bart"></el-input>
+                                <el-date-picker type="date" placeholder="选择日期" v-model="form.bart"
+                                                style="width: 100%;"></el-date-picker>
                             </el-form-item>
                             <el-form-item label="身份证号" prop="idcode">
                                 <el-input v-model="form.idcode"></el-input>
@@ -51,47 +55,72 @@
                         </el-col>
                         <el-col :span="8">
 
-                            <el-form-item label="所属项目" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="所属项目" prop="project">
+                                <el-select v-model="form.project" placeholder="请选择">
+                                    <el-option key="1" label="瀚联项目" value="1"></el-option>
+                                    <el-option key="2" label="其他项目" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="归属公司" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="归属公司" prop="company">
+                                <el-select v-model="form.company" placeholder="请选择">
+                                    <el-option key="1" label="瀚联科技" value="1"></el-option>
+                                    <el-option key="2" label="其他总包" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="班组" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="班组" prop="cla">
+                                <el-select v-model="form.cla" placeholder="请选择">
+                                    <el-option key="1" label="张三的班组" value="1"></el-option>
+                                    <el-option key="2" label="里斯的班组" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="是否班组长" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="是否班组长" prop="isideader">
+                                <el-select v-model="form.isideader" placeholder="请选择">
+                                    <el-option key="1" label="是" value="1"></el-option>
+                                    <el-option key="2" label="否" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="工种" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="工种" prop="vvv">
+                                <el-select v-model="form.vvv" placeholder="请选择">
+                                    <el-option key="1" label="是" value="1"></el-option>
+                                    <el-option key="2" label="否" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="工人类型" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="工人类型" prop="userType">
+                                <el-radio-group v-model="form.userType">
+                                    <el-radio label="班组长" value="1"></el-radio>
+                                    <el-radio label="普通工人" value="1"></el-radio>
+                                    <el-radio label="其他" value="1"></el-radio>
+                                </el-radio-group>
                             </el-form-item>
-                            <el-form-item label="状态" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="状态" prop="status">
+                                <el-select v-model="form.status" placeholder="请选择">
+                                    <el-option key="1" label="已进场" value="1"></el-option>
+                                    <el-option key="2" label="已出场" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
-                            <el-form-item label="进场时间" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="进场时间" prop="inputDate">
+                                {{form.inputDate}}
                             </el-form-item>
-                            <el-form-item label="退场时间" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="退场时间" prop="outDate">
+                                {{form.outDate}}
                             </el-form-item>
-                            <el-form-item label="是否有合同" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="是否有合同" prop="isContract">
+                                <el-select v-model="form.isContract" placeholder="请选择">
+                                    <el-option key="1" label="已进场" value="1"></el-option>
+                                    <el-option key="2" label="已出场" value="2"></el-option>
+                                </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :span="8">
 
-                            <el-form-item label="入册工龄" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="入册工龄" prop="date">
+                                {{form.name}}
                             </el-form-item>
                             <el-form-item label="认证技能" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                                {{form.name}}
                             </el-form-item>
-                            <el-form-item label="身体状态" prop="name">
-                                <el-input v-model="form.name"></el-input>
+                            <el-form-item label="身体状态" prop="status">
+                                {{form.name}}
                             </el-form-item>
                             无不良记录
                             <el-form-item label="手机号" prop="name">
@@ -104,11 +133,10 @@
 
                             <el-form-item>
                                 <el-button type="primary" @click="onSubmit">表单提交</el-button>
-                                <el-button @click="onReset">重置表单</el-button>
+                                <el-button @click="onReset">取消</el-button>
                             </el-form-item>
                         </el-col>
                     </el-row>
-
                 </el-form>
 
             </div>
@@ -119,9 +147,12 @@
 <script>
 import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router"  // 引入userRouter
 export default {
     name: "baseform",
     setup() {
+        const router = useRouter();
+
         const options = [
             {
                 value: "guangdong",
@@ -209,7 +240,8 @@ export default {
         };
         // 重置
         const onReset = () => {
-            formRef.value.resetFields();
+            //formRef.value.resetFields();
+            router.go(-1)
         };
 
         return {

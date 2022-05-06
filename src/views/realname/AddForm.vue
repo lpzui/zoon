@@ -12,23 +12,89 @@
             <div>
                 <el-form ref="formRef" :rules="rules" :model="form" label-width="80px">
                     <el-row :gutter="20" class="mgb60">
-                        <el-col :span="8">
-                            <h3>身份证信息</h3>
+                        <el-col :span="6">
+                            <el-upload class="upload-demo" drag action="http://jsonplaceholder.typicode.com/api/posts/" multiple>
+                                <i class="el-icon-upload"></i>
+                                <div class="el-upload__text">
+                                    将文件拖到此处，或
+                                    <em>点击上传</em>
+                                </div>
+                                <template #tip>
+                                    <div class="el-upload__tip">只能上传 jpg/png 文件，且不超过 500kb</div>
+                                </template>
+                            </el-upload>
                         </el-col>
-                        <el-col :span="8">
-                            <h3>工人项目信息</h3>
-                        </el-col>
-                        <el-col :span="8">
-                            <h3>实名制基础信息</h3>
+                        <el-col :span="6">
+                            <el-upload class="upload-demo" drag action="http://jsonplaceholder.typicode.com/api/posts/" multiple>
+                                <i class="el-icon-upload"></i>
+                                <div class="el-upload__text">
+                                    将文件拖到此处，或
+                                    <em>点击上传</em>
+                                </div>
+                                <template #tip>
+                                    <div class="el-upload__tip">只能上传 jpg/png 文件，且不超过 500kb</div>
+                                </template>
+                            </el-upload>
+
                         </el-col>
                     </el-row>
                     <el-row :gutter="20" class="mgb60">
-                        <el-col :span="8">
+                        <el-col :span="20">
+
+                            <el-upload
+                                    action="#"
+                                    list-type="picture-card"
+                                    :auto-upload="false">
+                                <i slot="default" class="el-icon-plus"></i>
+                                <div slot="file" slot-scope="{file}">
+                                    <img class="el-upload-list__item-thumbnail"
+                                         :src="file.url" alt=""/>
+                                    <span class="el-upload-list__item-actions">
+                                <span class="el-upload-list__item-preview"
+                                      @click="handlePictureCardPreview(file)">
+                                  <i class="el-icon-zoom-in"></i>
+                                </span>
+                                <span v-if="!disabled"
+                                      class="el-upload-list__item-delete"
+                                      @click="handleDownload(file)">
+                                  <i class="el-icon-download"></i>
+                                </span>
+                                <span v-if="!disabled"
+                                      class="el-upload-list__item-delete"
+                                      @click="handleRemove(file)">
+                                  <i class="el-icon-delete"></i>
+                                </span>
+                              </span>
+                                </div>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
+                        </el-col>
+
+                    </el-row>
+
+                    <el-row :gutter="20" class="mgb60">
+                        <el-col :span="10">
+                            <h3>身份证信息</h3>
+                        </el-col>
+                        <el-col :span="10">
+                            <h3>工人项目信息</h3>
+                        </el-col>
+                    </el-row>
+                    <el-row :gutter="20" class="mgb60">
+                        <el-col :span="10">
                             <el-form-item label="姓名" prop="name">
                                 <el-input v-model="form.name"></el-input>
                             </el-form-item>
-                            <el-form-item label="民族" prop="region">
-                                <el-input v-model="form.region"></el-input>
+                            <el-form-item label="证件类型" prop="certificateType">
+                                <el-select v-model="form.certificateType" placeholder="请选择">
+                                    <el-option key="1" label="身份证" value="1"></el-option>
+                                    <el-option key="2" label="临时身份证" value="2"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="证件号码" prop="idcode">
+                                <el-input v-model="form.idcode"></el-input>
                             </el-form-item>
                             <el-form-item label="性别" prop="sex">
                                 <el-select v-model="form.sex" placeholder="请选择">
@@ -36,24 +102,25 @@
                                     <el-option key="2" label="女" value="xtc"></el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="年龄" prop="age">
-                                <el-input v-model="form.age"></el-input>
+                            <el-form-item label="民族" prop="region">
+                                <el-input v-model="form.region"></el-input>
                             </el-form-item>
+
+
                             <el-form-item label="出生日期" prop="bart">
                                 <el-input v-model="form.bart"></el-input>
-                            </el-form-item>
-                            <el-form-item label="身份证号" prop="idcode">
-                                <el-input v-model="form.idcode"></el-input>
-                            </el-form-item>
-                            <el-form-item label="籍贯" prop="jigaun">
-                                <el-input v-model="form.jigaun"></el-input>
                             </el-form-item>
                             <el-form-item label="地址" prop="address">
                                 <el-input v-model="form.address"></el-input>
                             </el-form-item>
+<!--                            <el-form-item label="籍贯" prop="jigaun">-->
+<!--                                <el-input v-model="form.jigaun"></el-input>-->
+<!--                            </el-form-item>-->
+<!--                            <el-form-item label="年龄" prop="age">-->
+<!--                                <el-input v-model="form.age"></el-input>-->
+<!--                            </el-form-item>-->
                         </el-col>
-                        <el-col :span="8">
-
+                        <el-col :span="10">
                             <el-form-item label="所属项目" prop="project">
                                 <el-select v-model="form.project" placeholder="请选择">
                                     <el-option key="1" label="瀚联项目" value="1"></el-option>
@@ -100,26 +167,9 @@
                                 <el-input v-model="form.name"></el-input>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="8">
-
-                            <el-form-item label="入册工龄" prop="name">
-                                <el-input v-model="form.name"></el-input>
-                            </el-form-item>
-                            <el-form-item label="认证技能" prop="name">
-                                <el-input v-model="form.name"></el-input>
-                            </el-form-item>
-                            <el-form-item label="身体状态" prop="name">
-                                <el-input v-model="form.name"></el-input>
-                            </el-form-item>
-                            无不良记录
-                            <el-form-item label="手机号" prop="name">
-                                <el-input v-model="form.name"></el-input>
-                            </el-form-item>
-                        </el-col>
                     </el-row>
                     <el-row>
                         <el-col :span="24">
-
                             <el-form-item>
                                 <el-button type="primary" @click="onSubmit">表单提交</el-button>
                                 <el-button @click="onReset">重置表单</el-button>
@@ -135,8 +185,9 @@
 </template>
 
 <script>
-    import { reactive, ref } from "vue";
-    import { ElMessage } from "element-plus";
+    import {reactive, ref} from "vue";
+    import {ElMessage} from "element-plus";
+
     export default {
         name: "baseform",
         setup() {
@@ -229,7 +280,17 @@
             const onReset = () => {
                 formRef.value.resetFields();
             };
-
+            const handleRemove =(file) => {
+                console.log(file);
+            };
+            const handlePictureCardPreview = (file) => {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            };
+            const handleDownload = (file) => {
+                console.log(file);
+            }
+            const file = {}
             return {
                 options,
                 rules,
@@ -237,6 +298,10 @@
                 form,
                 onSubmit,
                 onReset,
+                handleRemove,
+                handlePictureCardPreview,
+                handleDownload,
+                file,
             };
         },
     };

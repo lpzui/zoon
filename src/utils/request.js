@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-    //baseURL: "eeeee", // url = base url + request url
+    baseURL: "http://192.168.188.65:8080/", // url = base url + request url
     // withCredentials: true, // send cookies when cross-domain requests
     baseURL: 'http://localhost:8808/labor/system',
     timeout: 5000 // request timeout

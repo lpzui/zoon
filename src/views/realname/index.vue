@@ -9,7 +9,7 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                
+
                 <el-input v-model="query.name" placeholder="姓名/手机号/身份证" class="handle-input mr10"></el-input>
                 <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
                     <el-option key="1" label="广东省" value="广东省"></el-option>
@@ -161,11 +161,7 @@ import request from '../../utils/request'
 export default {
     name: "realname",
     setup() {
-        request({
-            url: '/vue-admin-template/user/info',
-            method: 'get',
-            data: {}
-        });
+
         const router = useRouter();
         const query = reactive({
             address: "",
@@ -181,6 +177,9 @@ export default {
                 tableData.value = res.list;
                 pageTotal.value = res.pageTotal || 50;
             });
+            tableData.value= [{state:'成功',date:'2022-04-23'},{state:'失败',date:'2022-04-23'},{state:'成功',date:'2022-04-23'}]
+            pageTotal.value =3 || 50;
+
         };
         getData();
 
