@@ -9,41 +9,46 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
+                合同名称
+                    <el-input v-model="query.name" placeholder="" class="handle-input mr10"></el-input>
+                合同类型
+                <el-select v-model="query.type" placeholder="合同类型" class="handle-select mr10">
+                    <el-option key="1" label="劳务派遣合同" value="1"></el-option>
+                    <el-option key="2" label="招聘合同" value="2"></el-option>
                 </el-select>
-                <el-input v-model="query.name" placeholder="用户名" class="handle-input mr10"></el-input>
+                合同日期
+                <el-date-picker
+                        v-model="form.date"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期">
+                </el-date-picker>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+                <el-button type="primary" icon="el-icon-search" @click="goInsert">添加</el-button>
             </div>
             <el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
-                <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="用户名"></el-table-column>
-                <el-table-column label="账户余额">
-                    <template #default="scope">￥{{ scope.row.money }}</template>
+                <el-table-column type="selection" width="55"></el-table-column>
+                <el-table-column prop="name" label="合同名称"></el-table-column>
+                <el-table-column label="合同类型">
+                    <template #default="scope">{{ scope.row.type }}</template>
                 </el-table-column>
-                <el-table-column label="头像(查看大图)" align="center">
+                <el-table-column prop="company" label="所属公司"></el-table-column>
+                <el-table-column prop="date" label="生效时间"></el-table-column>
+                <el-table-column prop="date" label="失效时间"></el-table-column>
+                <el-table-column label="合同状态" align="center">
                     <template #default="scope">
-                        <el-image class="table-td-thumb" :src="scope.row.thumb" :preview-src-list="[scope.row.thumb]">
-                        </el-image>
+                        <el-tag :type=" scope.row.state === '有效'? 'success' : scope.row.state === '失效' ? 'danger' : '' ">
+                            {{ scope.row.state }}
+                        </el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column prop="address" label="地址"></el-table-column>
-                <el-table-column label="状态" align="center">
+                <el-table-column prop="company" label="签署公司"></el-table-column>
+                <el-table-column prop="createUser" label="上传人"></el-table-column>
+                <el-table-column label="操作" width="210" align="center">
                     <template #default="scope">
-                        <el-tag :type="
-                                scope.row.state === '成功'
-                                    ? 'success'
-                                    : scope.row.state === '失败'
-                                    ? 'danger'
-                                    : ''
-                            ">{{ scope.row.state }}</el-tag>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="date" label="注册时间"></el-table-column>
-                <el-table-column label="操作" width="180" align="center">
-                    <template #default="scope">
+                        <el-button type="text" icon="el-icon-lx-search"
+                                   @click="handleDelete(scope.$index, scope.row)">查看</el-button>
                         <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑
                         </el-button>
                         <el-button type="text" icon="el-icon-delete" class="red"
@@ -81,17 +86,19 @@
 import { ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { fetchData } from "../../api/index";
+import {useRouter} from "vue-router";
 
 export default {
     name: "basetable",
     setup() {
+        const router = useRouter();
         const query = reactive({
             address: "",
             name: "",
             pageIndex: 1,
             pageSize: 10,
         });
-        const tableData = ref([]);
+        const tableData = ref([{name:'劳务派遣合同', type:'第三方制', company:'翰南科技',date:'2022-08-11',createUser:'admin', state:'有效'}]);
         const pageTotal = ref(0);
         // 获取表格数据
         const getData = () => {
@@ -134,11 +141,12 @@ export default {
         });
         let idx = -1;
         const handleEdit = (index, row) => {
-            idx = index;
-            Object.keys(form).forEach((item) => {
-                form[item] = row[item];
-            });
-            editVisible.value = true;
+            router.push('/contractUpdate')
+            // idx = index;
+            // Object.keys(form).forEach((item) => {
+            //     form[item] = row[item];
+            // });
+            // editVisible.value = true;
         };
         const saveEdit = () => {
             editVisible.value = false;
@@ -147,6 +155,9 @@ export default {
                 tableData.value[idx][item] = form[item];
             });
         };
+        const goInsert = () =>{
+            router.push('/contractAdd')
+        }
 
         return {
             query,
@@ -159,6 +170,7 @@ export default {
             handleDelete,
             handleEdit,
             saveEdit,
+            goInsert,
         };
     },
 };
