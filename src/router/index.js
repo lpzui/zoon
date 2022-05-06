@@ -10,14 +10,15 @@ const routes = [
         name: "Home",
         component: Home,
         children: [
+            // {
+            //     path: "/dashboard",
+            //     name: "dashboard",
+            //     meta: {
+            //         title: '系统首页'
+            //     },
+            //     component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
+            // }, 
             {
-                path: "/dashboard",
-                name: "dashboard",
-                meta: {
-                    title: '系统首页'
-                },
-                component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
-            }, {
                 path: "/table",
                 name: "basetable",
                 meta: {
