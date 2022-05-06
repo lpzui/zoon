@@ -13,12 +13,15 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
+        optimizeDeps: {
+        include: ['schart.js']
+    },
     server:{
         proxy:{
             //这里是通过请求/api 来转发到 https://api.pingping6.com/
             //假如你要请求https://api.*.com/a/a
             //那么axios的url，可以配置为 /api/a/a
-            '/api': 'https://api.*.com/'
+            '/api': 'http://192.168.188.65:8080/',
         }
         // proxy: {
         //     '/api': {

@@ -156,11 +156,6 @@ import request from '../../utils/request'
 export default {
     name: "realname",
     setup() {
-        request({
-            url: '/vue-admin-template/user/info',
-            method: 'get',
-            data: {}
-        });
         const router = useRouter();
         const query = reactive({
             address: "",
@@ -176,6 +171,9 @@ export default {
                 tableData.value = res.list;
                 pageTotal.value = res.pageTotal || 50;
             });
+            tableData.value= [{state:'成功',date:'2022-04-23'},{state:'失败',date:'2022-04-23'},{state:'成功',date:'2022-04-23'}] 
+            pageTotal.value =3 || 50;
+
         };
         getData();
 
