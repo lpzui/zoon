@@ -35,7 +35,7 @@ const routes = [
                 path: "/editReal",
                 name: "editReal",
                 meta: {
-                    title: '编辑实名制'
+                    title: '编辑实名制1'
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/realname/UpdateForm.vue")
 
