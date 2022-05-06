@@ -10,14 +10,14 @@ const routes = [
         name: "Home",
         component: Home,
         children: [
-            // {
-            //     path: "/dashboard",
-            //     name: "dashboard",
-            //     meta: {
-            //         title: '系统首页'
-            //     },
-            //     component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
-            // }, 
+            {
+                path: "/dashboard",
+                name: "dashboard",
+                meta: {
+                    title: '系统首页'
+                },
+                component: () => import ( /* webpackChunkName: "dashboard" */ "../views/Dashboard.vue")
+            }, 
             {
                 path: "/table",
                 name: "basetable",
@@ -25,14 +25,16 @@ const routes = [
                     title: '表格'
                 },
                 component: () => import ( /* webpackChunkName: "table" */ "../views/BaseTable.vue")
-            },{
+            },
+            {
                 path: "/realname",
                 name: "realname",
                 meta: {
-                    title: '实名制'
+                    title: '人员实名制认证'
                 },
                 component: () => import ( /* webpackChunkName: "table" */ "../views/realname/index.vue")
-            },{
+            },
+            {
                 path: "/editReal",
                 name: "editReal",
                 meta: {
@@ -40,7 +42,8 @@ const routes = [
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/realname/UpdateForm.vue")
 
-            }, {
+            }, 
+            {
                 path: "/addReal",
                 name: "addReal",
                 meta: {
@@ -48,7 +51,40 @@ const routes = [
                 },
                 component: () => import ( /* webpackChunkName: "dashboard" */ "../views/realname/AddForm.vue")
 
-            }, {
+            }, 
+            {
+                path: "/contract",
+                name: "contract",
+                meta: {
+                    title: '合同管理'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/contract/index.vue")
+            },
+            {
+                path: "/groupmanage",
+                name: "groupmanage",
+                meta: {
+                    title: '班组管理'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/groupmanage/index.vue")
+            },
+            {
+                path: "/subcontract",
+                name: "subcontract",
+                meta: {
+                    title: '分包商库'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/subcontract/index.vue")
+            },
+            {
+                path: "/checkwork",
+                name: "checkwork",
+                meta: {
+                    title: '考勤'
+                },
+                component: () => import ( /* webpackChunkName: "table" */ "../views/checkwork/index.vue")
+            },
+            {
                 path: "/charts",
                 name: "basecharts",
                 meta: {

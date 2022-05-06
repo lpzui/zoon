@@ -46,17 +46,41 @@ export default {
             {
                 icon: "el-icon-lx-cascades",
                 index: "/realname",
-                title: "实名制",
-                subs: [
-                    {
-                        index: "/editReal",
-                        title: "编辑人员信息",
-                    },
-                    {
-                        index: "/addReal",
-                        title: "添加人员",
-                    },
-                    ]
+                title: "人员实名制认证",
+                // subs: [
+                //      {
+                //         index: "/realname",
+                //         title: "编辑人员信息",
+                //     },
+                //     {
+                //         index: "/editReal",
+                //         title: "编辑人员信息",
+                //     },
+                //     {
+                //         index: "/addReal",
+                //         title: "添加人员",
+                //     },
+                //     ]
+            },
+            {
+                icon: "el-icon-lx-cascades",
+                index: "/groupmanage",
+                title: "班组管理",
+            },
+            {
+                icon: "el-icon-lx-cascades",
+                index: "/subcontract",
+                title: "分包商库",
+            },
+            {
+                icon: "el-icon-lx-cascades",
+                index: "/checkwork",
+                title: "考勤",
+            },
+             {
+                icon: "el-icon-lx-cascades",
+                index: "/contract",
+                title: "合同管理",
             },
             {
                 icon: "el-icon-lx-cascades",
