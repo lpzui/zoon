@@ -5,8 +5,20 @@
             <i v-if="!collapse" class="el-icon-s-fold"></i>
             <i v-else class="el-icon-s-unfold"></i>
         </div>
+        <div class="logoImage">
+             <div class="header-user-con">
+                   <div class="user-avator">
+                    <img src="../assets/img/img.jpg" />
+                </div>
+             </div>
+        </div>
         <div class="logo">劳务后台管理系统</div>
-        <div class="logo"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">实名制</span></div>
+
+        <div class="title"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">实名制</span></div>
+        <div class="title"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">劳务公司</span></div>
+        <div class="title"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">考勤统计</span></div>
+        <div class="title"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">合同管理</span></div>
+        <div class="title"><span style="color:white;font-size:16px;cursor: pointer" @click="gotoUser">系统管理</span></div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 消息中心 -->
@@ -105,10 +117,21 @@ export default {
     cursor: pointer;
     line-height: 70px;
 }
+.header .logoImage{
+    float: left;
+    padding-left: 40px;
+}
 .header .logo {
     float: left;
     width: 250px;
     line-height: 70px;
+    padding-left: 20px;
+}
+.header .title {
+    float: left;
+    width: 120px;
+    line-height: 70px;
+    padding-left: 10px;
 }
 
 .header .middle {
