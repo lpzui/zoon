@@ -38,15 +38,25 @@ import { useRoute } from "vue-router";
 export default {
     setup() {
         const items = [
-            {
-                icon: "el-icon-lx-home",
-                index: "/dashboard",
-                title: "系统首页",
-            },
+            // {
+            //     icon: "el-icon-lx-home",
+            //     index: "/dashboard",
+            //     title: "系统首页",
+            // },
             {
                 icon: "el-icon-lx-cascades",
                 index: "/realname",
                 title: "实名制",
+                subs: [
+                    {
+                        index: "/editReal",
+                        title: "编辑人员信息",
+                    },
+                    {
+                        index: "/addReal",
+                        title: "添加人员",
+                    },
+                    ]
             },
             {
                 icon: "el-icon-lx-cascades",
