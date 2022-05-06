@@ -9,41 +9,27 @@
         </div>
         <div class="container">
             <div class="handle-box">
-                <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
-                </el-select>
                 <el-input v-model="query.name" placeholder="用户名" class="handle-input mr10"></el-input>
                 <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+                <el-button type="primary" icon="el-icon-search" @click="goInsert">添加班组</el-button>
+
             </div>
             <el-table :data="tableData" border class="table" ref="multipleTable" header-cell-class-name="table-header">
                 <el-table-column prop="id" label="ID" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="用户名"></el-table-column>
-                <el-table-column label="账户余额">
-                    <template #default="scope">￥{{ scope.row.money }}</template>
+                <el-table-column prop="name" label="班组名称"></el-table-column>
+                <el-table-column label="班组负责人">
+                    <template #default="scope">{{ scope.row.leader }}</template>
                 </el-table-column>
-                <el-table-column label="头像(查看大图)" align="center">
+                <el-table-column prop="attach" label="进场附件"></el-table-column>
+                <el-table-column prop="inputDate" label="进场时间"></el-table-column>
+                <el-table-column prop="outDate" label="出场时间"></el-table-column>
+                <el-table-column prop="createUser" label="创建人"></el-table-column>
+                <el-table-column prop="createDate" label="创建时间"></el-table-column>
+                <el-table-column prop="remark" label="备注"></el-table-column>
+                <el-table-column label="操作" width="250" align="center">
                     <template #default="scope">
-                        <el-image class="table-td-thumb" :src="scope.row.thumb" :preview-src-list="[scope.row.thumb]">
-                        </el-image>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="address" label="地址"></el-table-column>
-                <el-table-column label="状态" align="center">
-                    <template #default="scope">
-                        <el-tag :type="
-                                scope.row.state === '成功'
-                                    ? 'success'
-                                    : scope.row.state === '失败'
-                                    ? 'danger'
-                                    : ''
-                            ">{{ scope.row.state }}</el-tag>
-                    </template>
-                </el-table-column>
-
-                <el-table-column prop="date" label="注册时间"></el-table-column>
-                <el-table-column label="操作" width="180" align="center">
-                    <template #default="scope">
+                        <el-button type="text" icon="el-icon-lx-search"
+                                   @click="handleDelete(scope.$index, scope.row)">查看</el-button>
                         <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑
                         </el-button>
                         <el-button type="text" icon="el-icon-delete" class="red"
@@ -81,10 +67,12 @@
 import { ref, reactive } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 import { fetchData } from "../../api/index";
+import { useRouter } from "vue-router";
 
 export default {
-    name: "basetable",
+    name: "grouupList",
     setup() {
+        const router = useRouter();
         const query = reactive({
             address: "",
             name: "",
@@ -99,6 +87,9 @@ export default {
                 tableData.value = res.list;
                 pageTotal.value = res.pageTotal || 50;
             });
+            tableData.value = [{id:1,name:'张三',leader:'王老五',attach:'合同',inputDate:'2021-08-01',outDate:'2022-10-01',createUser:'admin',createDate:'2021-08-01',remark:'士大夫'}
+                                ,{id:1,name:'张三',leader:'王老五',attach:'合同',inputDate:'2021-08-01',outDate:'2022-10-01',createUser:'admin',createDate:'2021-08-01',remark:'士大夫'}];
+            pageTotal.value = 3;
         };
         getData();
 
@@ -134,11 +125,12 @@ export default {
         });
         let idx = -1;
         const handleEdit = (index, row) => {
-            idx = index;
-            Object.keys(form).forEach((item) => {
-                form[item] = row[item];
-            });
-            editVisible.value = true;
+            router.push('/groupUpdate')
+            // idx = index;
+            // Object.keys(form).forEach((item) => {
+            //     form[item] = row[item];
+            // });
+            // editVisible.value = true;
         };
         const saveEdit = () => {
             editVisible.value = false;
@@ -147,7 +139,9 @@ export default {
                 tableData.value[idx][item] = form[item];
             });
         };
-
+        const goInsert = () =>{
+            router.push('/groupAdd')
+        }
         return {
             query,
             tableData,
@@ -159,6 +153,7 @@ export default {
             handleDelete,
             handleEdit,
             saveEdit,
+            goInsert,
         };
     },
 };
